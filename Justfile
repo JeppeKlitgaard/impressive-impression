@@ -10,6 +10,9 @@ thumbnail:
   typst compile --pages=1 --ppi=300 --format=png template/cv.typ thumbnail.png
   oxipng thumbnail.png
 
+demo:
+  typst compile --format=pdf template/cv.typ demo.pdf
+
 # run test suite
 test *args:
   tt --font-path "fonts/FontAwesome6" --font-path "fonts/OpenSans" run {{ args }}
@@ -40,6 +43,9 @@ uninstall-preview: (remove "@preview")
 
 # run ci suite
 ci: test
+
+# Run dev suite
+dev: thumbnail demo test
 
 [linux]
 install-fonts:

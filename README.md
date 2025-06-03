@@ -14,6 +14,8 @@ or alternatively can be used in a single-column layout.
 Usage of the template assumes some knowledge of [Typst], especially if
 extensive customisation is undertaken.
 
+You can see what the template could look like in [demo.pdf](./demo.pdf).
+
 ## Features
 
 - 🏃‍➡️ GitHub Runner for rendering CV and uploading as an artifact (see `.github/workflows/build.yml`)
