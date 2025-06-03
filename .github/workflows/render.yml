@@ -24,4 +24,10 @@ jobs:
 
       - name: Compile
         run: |
-          typst compile cv.typ
+          typst compile template/cv.typ cv.pdf
+
+      - name: Upload CV
+        uses: actions/upload-artifact@v3
+        with:
+          name: CV
+          path: cv.pdf
