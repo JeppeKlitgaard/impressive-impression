@@ -5,7 +5,7 @@
   cv,
   // Utils
   crop-image,
-  read-and-colorize-svg,
+  colorize-svg-string,
   // Elements
   dot-ratings,
   make-pill,
@@ -49,6 +49,12 @@
 #let linker-pdf(dest, body) = {
   let body-prefixed = [#fa-icon("file-pdf")#h(0.2em)#body]
   return linker(dest, body-prefixed)
+}
+
+#let read-and-colorize-svg(path, color) = {
+  let svg-content = read(path)
+  let colored-svg = colorize-svg-string(svg-content, color)
+  return colored-svg
 }
 
 #let make-main-content-block = make-main-content-block.with(theme: theme)
