@@ -1,1 +1,0 @@
-img = image("assets/profile.png")

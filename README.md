@@ -42,25 +42,6 @@ and enhancements.
 If there is some styling that is not easily done via the theming dictionary,
 please feel free to open an issue or Pull Request such that it can be improved for future versions.
 
-## Template adaptation checklist
-
-- [ ] Fill out `README.md`
-  - Change the `my-package` package name, including code snippets
-  - Check section contents and/or delete sections that don't apply
-- [ ] Adapt Repository URLs in `CHANGELOG.md`
-  - Consider only committing that file with your first release, or removing the "Initial Release" part in the beginning
-- [ ] Adapt or deactivate the release workflow in `.github/workflows/release.yml`
-  - to deactivate it, delete that file or remove/comment out lines 2-4 (`on:` and following)
-  - to use the workflow
-    - [ ] check the values under `env:`, particularly `REGISTRY_REPO`
-    - [ ] if you don't have one, [create a fine-grained personal access token](https://github.com/settings/tokens?type=beta) with [only Contents permission](https://stackoverflow.com/a/75116350/371191) for the `REGISTRY_REPO`
-    - [ ] on this repo, create a secret `REGISTRY_TOKEN` (at `https://github.com/[user]/[repo]/settings/secrets/actions`) that contains the so created token
-
-    if configured correctly, whenever you create a tag `v...`, your package will be pushed onto a branch on the `REGISTRY_REPO`, from which you can then create a pull request against [typst/packages](https://github.com/typst/packages/)
-- [ ] remove/replace the example test case
-- [ ] (add your actual code, docs and tests)
-- [ ] remove this section from the README
-
 ## Getting Started
 
 ### Web-App
@@ -71,19 +52,22 @@ These instructions will get you a copy of the project up and running on the typs
 
 In order for the fonts to be installed in the web app, upload the `fonts` directory found in this project to the Web App project.
 
-```typ
-#import "@preview/impressive-impression:0.1.0": *
+You can then adapt the CV according to your preferences.
 
-#show: my-show-rule.with()
-#my-func()
+### Using Compiler Directly
+
+You can check out the template using:
+```sh
+typst init "@preview/impressive-impression
 ```
 
-<picture>
-  <img src="docs/thumbnail.png">
-</picture>
+Which will set up a folder with the necessary files.
 
+This can then be adapted to suit your needs.
 
 ## Usage
+
+In essence
 
 A more in-depth description of usage. Any template arguments? A complicated example that showcases most if not all of the functions the package provides? This is also an excellent place to signpost the manual.
 

@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0]
+## [NEXT]
 
 <details>
 <summary>Migration guide from v0.1.X</summary>
@@ -31,9 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 <!-- Describe the feature set of the initial release here -->
--
--
--
+Initial release
 
 <!--
 Below are the target URLs for each version
