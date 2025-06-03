@@ -419,6 +419,8 @@
 #cv(
   theme: theme,
   paper: "a4",
-  main-contents: (main-content-1, main-content-2),
-  aside-contents: (aside-content-1, aside-content-2),
+  pages-content: (
+    ("left": aside-content-1, "main": main-content-1),
+    ("left": aside-content-2, "main": main-content-2),
+  ),
 )

@@ -1,11 +1,21 @@
 #import "theme.typ": theme-helper
 #import "themes/forty-seconds.typ": theme-fortyseconds
 
+/// Create a CV with the specified theme and paper size
 #let cv(
-  theme: theme-fortyseconds,
+  /// Theme dictionary to use for styling.
+  /// See src/themes/forty-seconds.typ for an example.
+  /// -> dictionary
+  theme: none,
+  /// Paper size to use for the CV.
+  /// -> string
   paper: "a4",
-  main-contents: (),
-  aside-contents: (),
+  /// Main contents of the CV.
+  /// Each element in the array can be either content or a dictionary set up as
+  /// - (left: content, main: content) -> This corresponds to a left aside and a main section
+  /// - (right: content, main: content) -> This corresponds to a right aside and a main section
+  /// - (main: content) -> This corresponds to a main section without an aside
+  pages-content: (),
 ) = {
   /// Helper function to get key from theme
   let th = theme-helper(theme)
@@ -17,35 +27,7 @@
 
   set text(..th("base-text"))
 
-  // Insets
-  let _aside-inset = (
-    top: th("margin"),
-    bottom: th("margin"),
-  )
-  if th("aside-side") == "right" {
-    _aside-inset.right = th("margin")
-    _aside-inset.left = th("gutter-margin")
-  } else if th("aside-side") == "left" {
-    _aside-inset.right = th("gutter-margin")
-    _aside-inset.left = th("margin")
-  }
-
-  let _main-inset = (
-    top: th("margin"),
-    bottom: th("margin"),
-  )
-  if th("aside-side") == "right" {
-    _main-inset.left = th("margin")
-    _main-inset.right = th("gutter-margin")
-  } else if th("aside-side") == "left" {
-    _main-inset.left = th("gutter-margin")
-    _main-inset.right = th("margin")
-  } else if th("aside-side") == none {
-    _main-inset.left = th("margin")
-    _main-inset.right = th("margin")
-  }
-
-  /// Asides
+  // Set up show functions
   let _aside-heading(it) = {
     if it.level == 1 {
       // Name
@@ -99,7 +81,30 @@
     }
   }
 
-  let wrap-aside(aside) = {
+  let _main-heading(it) = {
+    if it.level == 2 {
+      set text(..th("main-heading-text"))
+      it
+    } else if it.level == 3 {
+      set text(..th("main-subheading-text"))
+      it
+    }
+  }
+
+  // Set up wrap functions
+  let wrap-aside(aside, side) = {
+    let _aside-inset = (
+      top: th("margin"),
+      bottom: th("margin"),
+    )
+    if side == "right" {
+      _aside-inset.right = th("margin")
+      _aside-inset.left = th("gutter-margin")
+    } else if side == "left" {
+      _aside-inset.right = th("gutter-margin")
+      _aside-inset.left = th("margin")
+    }
+
     let _aside = [
       #set text(..th("aside-text"))
       #show heading: _aside-heading
@@ -115,18 +120,22 @@
     )
   }
 
-  // Main
-  let _main-heading(it) = {
-    if it.level == 2 {
-      set text(..th("main-heading-text"))
-      it
-    } else if it.level == 3 {
-      set text(..th("main-subheading-text"))
-      it
+  let wrap-main(main, aside-side) = {
+    let _main-inset = (
+      top: th("margin"),
+      bottom: th("margin"),
+    )
+    if aside-side == "right" {
+      _main-inset.left = th("margin")
+      _main-inset.right = th("gutter-margin")
+    } else if aside-side == "left" {
+      _main-inset.left = th("gutter-margin")
+      _main-inset.right = th("margin")
+    } else if aside-side == none {
+      _main-inset.left = th("margin")
+      _main-inset.right = th("margin")
     }
-  }
 
-  let wrap-main(main) = {
     let _main = [
       #set text(..th("main-text"))
       #show heading: set block(above: 1em)
@@ -142,51 +151,43 @@
       _main,
     )
   }
-  // Wrap
-  let wrapped-mains = ()
-  let wrapped-aside = ()
 
-  for main in main-contents {
-    wrapped-mains.push(wrap-main(main))
-  }
-
-  for aside in aside-contents {
-    wrapped-aside.push(wrap-aside(aside))
-  }
-
-  if th("aside-side") == none {
-    wrapped-aside = (none,) * wrapped-mains.len()
-  }
-
-  let contents = ()
-  if th("aside-side") == "left" {
-      contents = wrapped-aside.zip(wrapped-mains)
-  } else if th("aside-side") == "right" {
-      contents = wrapped-mains.zip(wrapped-aside)
-  } else {
-      contents = wrapped-aside.zip(wrapped-mains)
-  }
-
+  // Generate main content
   let final-contents = ()
-  for (index, (left, right)) in contents.enumerate() {
+  for (index, entry) in pages-content.enumerate() {
     let grid-contents = ()
-    let split = false
-    if left != none and right != none {
-      split = true
+
+    if type(entry) == dictionary {
+      assert(entry.at("main", default: none) != none, message: "Main content must be provided in the dictionary entry")
     }
 
-    if split {
-      grid-contents.push(left)
-      grid-contents.push(grid.vline(stroke: th("gutter-stroke")))
-      grid-contents.push(right)
-    } else if left != none {
-      grid-contents.push(
-        grid.cell(left, rowspan: 2)
-      )
-    } else if right != none {
-      grid-contents.push(
-        grid.cell(right, rowspan: 2)
-      )
+    if type(entry) == content {
+      // Single main content
+      grid-contents.push(grid.cell(wrap-main(entry, none), rowspan: 2))
+    } else if type(entry) == dictionary and entry.len() == 1{
+      // Single main content
+      grid-contents.push(grid.cell(wrap-main(entry.at("main"), none), rowspan: 2))
+    } else if type(entry) == dictionary {
+      if entry.at("left", default: none) != none {
+        // Left aside and main content
+        grid-contents += (
+          wrap-aside(entry.at("left"), "left"),
+          grid.vline(stroke: th("gutter-stroke")),
+          wrap-main(entry.at("main"), "left"),
+        )
+      } else if entry.at("right", default: none) != none {
+        // Right aside and main content
+        grid-contents += (
+          wrap-main(entry.at("main"), "right"),
+          grid.vline(stroke: th("gutter-stroke")),
+          wrap-aside(entry.at("right"), "right"),
+        )
+      } else {
+        panic("No aside (right/left) found in page " + (index + 1))
+      }
+
+    } else {
+      panic("Invalid entry type in pages-content: " + type(entry))
     }
 
     if index != 0 {
@@ -199,6 +200,7 @@
     ))
   }
 
+  // Spit out content
   [
     #set text(..th("base-text"))
     #final-contents.join()
