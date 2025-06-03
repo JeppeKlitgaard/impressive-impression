@@ -1,14 +1,32 @@
-# The `my-package` Package
-<div align="center">Version 0.1.0</div>
+# Impressive Impression CV Template
 
-A short description about the project and/or client.
+_Impressive Impression_ is a CV (Curriculum Vitae) template for users wishing to
+typeset their CV using [Typst].
+
+It was developed to fit my personal CV, which I ported from LaTeX to Typst,
+and as such is heavily inspired by the layout of the [FortySecondsCV] template for LaTeX,
+which in turn is inspired by Carmine Spagnuolo's [Twenty Seconds Curriculum Vitae].
+
+The template is highly flexible and supports themes.
+It works as a split CV with a narrow column on the side (left or right) for shorter information,
+or alternatively can be used in a single-column layout.
+
+Usage of the template assumes some knowledge of [Typst], especially if
+extensive customisation is undertaken.
+
+## Features
+
+- 🏃‍➡️ GitHub Runner for rendering CV and uploading as an artifact
+- 📄 1, 2, or more pages
+- 📝 Two-column (left or right), or single column
+- 🎨 Themable
+- 📊 Stats and skills section
 
 ## Template adaptation checklist
 
 - [ ] Fill out `README.md`
   - Change the `my-package` package name, including code snippets
   - Check section contents and/or delete sections that don't apply
-- [ ] Check and/or replace `LICENSE` by something that suits your needs
 - [ ] Fill out `typst.toml`
   - See also the [typst/packages README](https://github.com/typst/packages/?tab=readme-ov-file#package-format)
 - [ ] Adapt Repository URLs in `CHANGELOG.md`
@@ -30,7 +48,7 @@ A short description about the project and/or client.
 These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
 
 ```typ
-#import "@preview/my-package:0.1.0": *
+#import "@preview/impressive-impression:0.1.0": *
 
 #show: my-show-rule.with()
 #my-func()
@@ -67,3 +85,15 @@ A more in-depth description of usage. Any template arguments? A complicated exam
 * Confluence link:
 * Asana board:
 * etc...
+  
+## Attribution
+
+Images in `assets/flags` are from [Lipis](https://github.com/lipis)'s
+[flag-icons](https://github.com/lipis/flag-icons) project,
+which is MIT licensed.
+
+Inspiration comes from the LaTeX-based [FortySecondsCV] and [Twenty Seconds Curriculum Vitae] projects.
+
+[Typst]: https://typst.app/
+[FortySecondsCV]: https://github.com/PandaScience/FortySecondsCV
+[Twenty Seconds Curriculum Vitae]: https://github.com/spagnuolocarmine/TwentySecondsCurriculumVitae-LaTex
