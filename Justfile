@@ -16,7 +16,7 @@ thumbnail:
 
 # run test suite
 test *args:
-  tt --root . --use-system-fonts run {{ args }}
+  tt --root . --font-path "fonts/FontAwesome6" --font-path "fonts/OpenSans" run {{ args }}
 
 # update test cases
 update *args:
@@ -48,6 +48,6 @@ ci: test doc
 [linux]
 install-fonts:
   mkdir -p ~/.local/share/fonts
-  cp -v fonts/FontAwesome6/*.otf ~/.local/share/fonts/
-  cp -v fonts/OpenSans/*.ttf ~/.local/share/fonts/
+  cp fonts/FontAwesome6/*.otf ~/.local/share/fonts/
+  cp fonts/OpenSans/*.ttf ~/.local/share/fonts/
   fc-cache -fv

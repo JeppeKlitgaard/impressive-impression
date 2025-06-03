@@ -39,13 +39,8 @@ jobs:
       - name: Setup Package
         run: just install-preview
 
-      - name: Install fonts
-        run: just install-fonts
-
       - name: Run test suite
         run: |
-          tt --version
-          just install-fonts
           just test
 
       - name: Archive test results
