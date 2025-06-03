@@ -11,6 +11,9 @@ doc:
   typst compile docs/manual.typ docs/manual.pdf
   typst compile docs/thumbnail.typ thumbnail-light.svg
 
+thumbnail:
+  typst compile --pages=1 --ppi=300 --format=png template/cv.typ docs/thumbnail.png
+
 # run test suite
 test *args:
   tt run {{ args }}

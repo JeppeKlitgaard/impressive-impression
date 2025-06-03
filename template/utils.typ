@@ -2,6 +2,12 @@
 #import "@preview/impressive-impression:0.1.0": theme-helper
 
 /// Return a flag from the assets directory.
+#let flag(id, ..image-args) = {
+  return image(
+    "assets/flags/" + lower(id) + ".svg",
+    ..image-args
+  )
+}
 
 /// Create a factory function for Font Awesome stacked icons with a specific theme.
 #let fa-icon-factory-stack(
@@ -47,25 +53,4 @@
 
     fa-stack(icon-args)
   }
-}
-
-/// Initial code taken from https://github.com/typst/typst/issues/1939#issuecomment-1680154871
-#let colorize(svg, color) = {
-  let select = regex("fill=\"([^\"]*)\"")
-  if svg.contains(select) {
-    // Just replace
-    svg = svg.replace(select, "fill=\""+color.to-hex()+"\"")
-  } else {
-    // Explicitly state color
-    svg = svg.replace("<svg ", "<svg fill=\""+color.to-hex()+"\" ")
-  }
-
-  return svg
-}
-
-#let read-and-colorize-svg(path, color, ..image-args) = {
-  let svg-str = read(path)
-  let svg-str-colorized = colorize(svg-str, color)
-  let img = image(bytes(svg-str-colorized), format: "svg", ..image-args)
-  return img
 }

@@ -22,13 +22,31 @@ extensive customisation is undertaken.
 - 🎨 Themable
 - 📊 Stats and skills section
 
+## Installation
+
+- _Impressive Impression_ relies on [Typst] to produce PDFs.
+  - Existing knowledge of [Typst] is expected, including how to set it up and compile documents. 
+- The default font is `Open Sans`, which must be installed to get the intended output
+  - Simply install all the fonts in `fonts/OpenSans` folder
+- By default, FontAwesome 6 Fonts are used
+  - The fonts can be installed using the files in the `fonts/FontAwesome6` folder
+  - Note that using FontAwesome icons is not a requirement and is not actually implemented in the `impressive-impression` package, but added directly in the default template.
+- If you plan on cloning the _Impressive Impression_ repository, you should have [git-lfs] installed
+  - This is installed by default in the Windows git installer
+
+## Contributing
+
+I am looking to actively maintain this template and would love to receive feedback
+and enhancements.
+
+If there is some styling that is not easily done via the theming dictionary,
+please feel free to open an issue or Pull Request such that it can be improved for future versions.
+
 ## Template adaptation checklist
 
 - [ ] Fill out `README.md`
   - Change the `my-package` package name, including code snippets
   - Check section contents and/or delete sections that don't apply
-- [ ] Fill out `typst.toml`
-  - See also the [typst/packages README](https://github.com/typst/packages/?tab=readme-ov-file#package-format)
 - [ ] Adapt Repository URLs in `CHANGELOG.md`
   - Consider only committing that file with your first release, or removing the "Initial Release" part in the beginning
 - [ ] Adapt or deactivate the release workflow in `.github/workflows/release.yml`
@@ -45,7 +63,13 @@ extensive customisation is undertaken.
 
 ## Getting Started
 
+### Web-App
+
+Find `impressive-impression` in the list of templates, give it an an appropriate title such as `My CV` and press create.
+
 These instructions will get you a copy of the project up and running on the typst web app. Perhaps a short code example on importing the package and a very simple teaser usage.
+
+In order for the fonts to be installed in the web app, upload the `fonts` directory found in this project to the Web App project.
 
 ```typ
 #import "@preview/impressive-impression:0.1.0": *
@@ -55,19 +79,9 @@ These instructions will get you a copy of the project up and running on the typs
 ```
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./thumbnail-dark.svg">
-  <img src="./thumbnail-light.svg">
+  <img src="docs/thumbnail.png">
 </picture>
 
-### Installation
-
-A step by step guide that will tell you how to get the development environment up and running. This should explain how to clone the repo and where to (maybe a link to the typst documentation on it), along with any pre-requisite software and installation steps.
-
-```
-$ First step
-$ Another step
-$ Final step
-```
 
 ## Usage
 
@@ -78,15 +92,8 @@ A more in-depth description of usage. Any template arguments? A complicated exam
 
 #let my-complicated-example = ...
 ```
-
-## Additional Documentation and Acknowledgments
-
-* Project folder on server:
-* Confluence link:
-* Asana board:
-* etc...
   
-## Attribution
+## Attribution and Acknowledgements
 
 Images in `assets/flags` are from [Lipis](https://github.com/lipis)'s
 [flag-icons](https://github.com/lipis/flag-icons) project,
@@ -94,6 +101,14 @@ which is MIT licensed.
 
 Inspiration comes from the LaTeX-based [FortySecondsCV] and [Twenty Seconds Curriculum Vitae] projects.
 
+Fonts in `fonts/FontAwesome6` are from the [FontAwesome] company and licensed under the SIL OFL 1.1 License.
+
+Fonts in `fonts/OpenSans` are from Google's [OpenSans] project and licensed under the SIL OFL 1.1 License.
+
 [Typst]: https://typst.app/
 [FortySecondsCV]: https://github.com/PandaScience/FortySecondsCV
 [Twenty Seconds Curriculum Vitae]: https://github.com/spagnuolocarmine/TwentySecondsCurriculumVitae-LaTex
+[FontAwesome Download]: https://fontawesome.com/download
+[Google Fonts]: https://fonts.google.com
+[git lfs]: https://git-lfs.com/
+[FontAwesome]: https://fontawesome.com/

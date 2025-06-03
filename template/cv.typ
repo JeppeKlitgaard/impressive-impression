@@ -1,5 +1,11 @@
+//! NOTE: You may need to install FontAwesome 6 and Open Sans fonts to render this CV correctly.
+//! See installation information at: https://github.com/JeppeKlitgaard/impressive-impression
+
 #import "@preview/impressive-impression:0.1.0": (
+  cv,
+  // Utils
   crop-image,
+  read-and-colorize-svg,
   // Elements
   dot-ratings,
   make-pill,
@@ -7,12 +13,12 @@
   make-aside-grid,
   make-main-content-block,
   make-main-content-block-with-timeline,
+  // Theme
   theme-helper,
-  theme-fortyseconds,
-  cv,
 )
 
-#import "utils.typ": flag, fa-icon-factory, fa-icon-factory-stack, read-and-colorize-svg
+#import "utils.typ": flag, fa-icon-factory, fa-icon-factory-stack
+#import "theme.typ": theme
 
 #import "@preview/fontawesome:0.5.0": fa-icon, fa-stack
 #import "@preview/nth:1.0.1": nth
@@ -24,7 +30,6 @@
   Holistic Detective & Interconnectedness Specialist
 ]
 
-#let theme = theme-fortyseconds
 #let th = theme-helper(theme)
 
 #let iconer-stack = fa-icon-factory-stack(theme)
@@ -32,8 +37,8 @@
 #let dot-ratings = dot-ratings.with(
   size: 6.5pt,
   spacing: 3.5pt,
-  color-active: theme-prop(theme-fortyseconds, "primary-accent-color"),
-  color-inactive: theme-prop(theme-fortyseconds, "faint-text-color").transparentize(65%),
+  color-active: th("primary-accent-color"),
+  color-inactive: th("faint-text-color").transparentize(65%),
 )
 
 #let linker(dest, body) = {
@@ -263,38 +268,6 @@
     [Registration valid until January #nth(3), 2318.]
   )
 
-  #v(-0.6em)
-  == Open Source Contributions
-  #make-main-content-block-with-timeline(
-    ([Present], [2013]),
-    "Personal Projects and Smaller Contributions",
-    supplement: [#link("https://github.com/JeppeKlitgaard", "GitHub")],
-    [
-      Throughout most of my adolescent and adult life I've contributed
-      to various Open Source projects and authored a wide variety of
-      different projects. Most of this activity can be found on my GitHub
-      profile
-    ]
-  )
-  #make-main-content-block-with-timeline(
-    ([2023], [2022]),
-    "Font Compilation Tooling",
-    supplement: [#link("https://openmoji.org/", "OpenMoji")],
-    [
-      Development of a dockerised font compilation toolset that enables
-      compilation of vector files into color-fonts in a variety of formats
-      using Google's `nanoemoji` tool.
-    ],
-  )
-  #make-main-content-block-with-timeline(
-    ([2022], [2021]),
-    "Continuous Integration and Release Tooling",
-    supplement: [#link("https://github.com/pyFFTW/pyFFTW", "PyFFTW")],
-    [
-      Tooling to build the `PyFTTW` Python bindings using _GitHub Actions_ across various platforms.
-    ],
-  )
-
   == Association and Voluntary Work
   #make-main-content-block-with-timeline(
     ([2020], [2019]),
@@ -360,7 +333,6 @@
     )
 
   ]
-
 
   // Footer
   #v(1fr)
@@ -444,9 +416,9 @@
 ]
 
 // Generate CV
-#show: cv.with(
-  theme: theme-fortyseconds,
+#cv(
+  theme: theme,
   paper: "a4",
   main-contents: (main-content-1, main-content-2),
   aside-contents: (aside-content-1, aside-content-2),
-)()
+)

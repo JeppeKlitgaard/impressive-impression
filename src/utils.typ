@@ -64,3 +64,43 @@
   let squared-image = crop-square(image)
   box(squared-image, radius: radius, clip: true, width: size, stroke: stroke)
 }
+
+/// Colorizes an SVG using crude regex replacement.
+/// Initial code taken from https://github.com/typst/typst/issues/1939#issuecomment-1680154871
+#let colorize(
+  /// The SVG string to colorize
+  /// -> string
+  svg,
+  /// The color to use for the fill
+  /// -> color
+  color,
+) = {
+  let select = regex("fill=\"([^\"]*)\"")
+  if svg.contains(select) {
+    // Just replace
+    svg = svg.replace(select, "fill=\""+color.to-hex()+"\"")
+  } else {
+    // Explicitly state color
+    svg = svg.replace("<svg ", "<svg fill=\""+color.to-hex()+"\" ")
+  }
+
+  return svg
+}
+
+/// Utility function to read an SVG file, colorize it, and return it as an image.
+#let read-and-colorize-svg(
+  /// The path to the SVG file
+  /// -> string
+  path,
+  /// The color to use for the fill
+  /// -> color
+  color,
+  /// Additional arguments for the image function
+  /// -> arguments
+  ..image-args
+  ) = {
+  let svg-str = read(path)
+  let svg-str-colorized = colorize(svg-str, color)
+  let img = image(bytes(svg-str-colorized), format: "svg", ..image-args)
+  return img
+}

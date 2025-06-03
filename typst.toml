@@ -32,8 +32,7 @@ exclude = [
   "scripts",
   ".typstignore",
   "Justfile",
-  "thumbnail-dark.svg",
-  "thumbnail-light.svg",
+  "CHANGELOG.md",
 ]
 
 [template]
