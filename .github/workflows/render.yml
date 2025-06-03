@@ -20,12 +20,12 @@ jobs:
       - name: Install Just
         uses: extractions/setup-just@v2
         with:
-          just-version: 1.40
+          just-version: "1.40.0"
 
       - name: Install Typst
         uses: typst-community/setup-typst@v3
         with:
-          typst-version: 0.13
+          typst-version: "0.13"
 
       - name: Compile
         run: |
