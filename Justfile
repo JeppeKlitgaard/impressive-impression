@@ -7,7 +7,7 @@ default:
   @just --list --unsorted
 
 thumbnail:
-  typst compile --pages=1 --ppi=300 --format=png template/cv.typ docs/thumbnail.png
+  typst compile --pages=1 --ppi=300 --format=png template/cv.typ thumbnail.png
 
 # run test suite
 test *args:

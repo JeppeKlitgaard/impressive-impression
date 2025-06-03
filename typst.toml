@@ -28,7 +28,6 @@ categories = ["cv"]
 disciplines = []
 exclude = [
   ".github",
-  "docs",
   "fonts",
   "scripts",
   "tests",
@@ -42,4 +41,4 @@ exclude = [
 [template]
 path = "template"
 entrypoint = "cv.typ"
-thumbnail = "docs/thumbnail.png"
+thumbnail = "thumbnail.png"
