@@ -16,7 +16,7 @@ thumbnail:
 
 # run test suite
 test *args:
-  tt --root . --font-path fonts/FontAwesome6 --font-path fonts/OpenSans run {{ args }}
+  tt --root . --font-path fonts/FontAwesome6/*.otf --font-path fonts/OpenSans/*.ttf run {{ args }}
 
 # update test cases
 update *args:
