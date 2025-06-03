@@ -50,6 +50,7 @@ jobs:
       - name: Build package
         run: |
           just install-preview
+          just install-fonts
           just thumbnail
           just package out
 
