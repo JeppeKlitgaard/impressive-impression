@@ -1,0 +1,1 @@
+#include "../../template/cv.typ"

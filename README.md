@@ -16,7 +16,7 @@ extensive customisation is undertaken.
 
 ## Features
 
-- 🏃‍➡️ GitHub Runner for rendering CV and uploading as an artifact
+- 🏃‍➡️ GitHub Runner for rendering CV and uploading as an artifact (see `.github/workflows/build.yml`)
 - 📄 1, 2, or more pages
 - 📝 Two-column (left or right), or single column
 - 🎨 Themable
