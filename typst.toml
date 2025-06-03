@@ -29,13 +29,17 @@ disciplines = []
 exclude = [
   ".github",
   "docs",
+  "fonts",
   "scripts",
+  "tests",
+  ".gitignore",
+  ".gitattributes",
   ".typstignore",
-  "Justfile",
   "CHANGELOG.md",
+  "Justfile",
 ]
 
 [template]
 path = "template"
 entrypoint = "cv.typ"
-thumbnail = "thumbnail.png"
+thumbnail = "docs/thumbnail.png"
