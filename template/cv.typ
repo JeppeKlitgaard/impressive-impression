@@ -54,10 +54,6 @@
 #let make-main-content-block = make-main-content-block.with(theme: theme)
 #let make-main-content-block-with-timeline = make-main-content-block-with-timeline.with(theme: theme)
 
-#let url-for(path) = {
-  return "https://jeppe.science/profile/" + path
-}
-
 // Page 1
 #let main-content-1 = [
   == Introduction
