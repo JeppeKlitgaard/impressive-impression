@@ -67,15 +67,27 @@ This can then be adapted to suit your needs.
 
 ## Usage
 
-In essence
+The main function `cv()` takes arguments as:
 
-A more in-depth description of usage. Any template arguments? A complicated example that showcases most if not all of the functions the package provides? This is also an excellent place to signpost the manual.
-
-```typ
-#import "@preview/my-package:0.1.0": *
-
-#let my-complicated-example = ...
+```typst
+#cv(
+  theme: theme,
+  paper: "a4",
+  pages-content: (
+    ("left": aside-content-1, "main": main-content-1),
+    ("left": aside-content-2, "main": main-content-2),
+  ),
+)
 ```
+
+Where `pages-content` is an array of dictionaries containing the asides and main contents.
+You can specify the side or not include any aside to get different layouts.
+
+You can construct the aside and main contents as you please, allowing you the full flexibility and power of
+[Typst].
+
+You can explore the various utility and element functions found in the source code, which
+can help construct a nice layout for your CV. These are not documented, but their use is shown in the default template.
   
 ## Attribution and Acknowledgements
 
