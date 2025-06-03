@@ -42,7 +42,9 @@ jobs:
         run: just install-fonts
 
       - name: Run test suite
-        run: just test
+        run: |
+          just install-fonts
+          just test
 
       - name: Archive test results
         uses: actions/upload-artifact@v4
