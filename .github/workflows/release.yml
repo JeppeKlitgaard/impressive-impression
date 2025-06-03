@@ -25,7 +25,11 @@ jobs:
       - name: Install just
         uses: taiki-e/install-action@v2
         with:
-          tool: just
+          tool: just,cargo-binstall
+
+      - name: Install Rust tooling
+        run:
+          cargo binstall --y just,oxipng
 
       - name: Setup typst
         uses: typst-community/setup-typst@v3

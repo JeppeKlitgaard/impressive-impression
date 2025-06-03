@@ -8,6 +8,7 @@ default:
 
 thumbnail:
   typst compile --pages=1 --ppi=300 --format=png template/cv.typ thumbnail.png
+  oxipng thumbnail.png
 
 # run test suite
 test *args:

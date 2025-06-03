@@ -88,6 +88,11 @@ You can construct the aside and main contents as you please, allowing you the fu
 
 You can explore the various utility and element functions found in the source code, which
 can help construct a nice layout for your CV. These are not documented, but their use is shown in the default template.
+
+## Development Setup
+
+- Install `just` (`brew install just`)
+- Install `oxipng` (`cargo install oxipng`)
   
 ## Attribution and Acknowledgements
 
