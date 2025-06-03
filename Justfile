@@ -11,11 +11,11 @@ thumbnail:
 
 # run test suite
 test *args:
-  tt --root . --font-path "fonts/FontAwesome6" --font-path "fonts/OpenSans" run {{ args }}
+  tt --font-path "fonts/FontAwesome6" --font-path "fonts/OpenSans" run {{ args }}
 
 # update test cases
 update *args:
-  tt update {{ args }}
+  tt --font-path "fonts/FontAwesome6" --font-path "fonts/OpenSans" update {{ args }}
 
 # package the library into the specified destination folder
 package target:
