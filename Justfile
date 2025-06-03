@@ -6,11 +6,6 @@ export TYPST_ROOT := root
 default:
   @just --list --unsorted
 
-# generate manual
-doc:
-  typst compile docs/manual.typ docs/manual.pdf
-  typst compile docs/thumbnail.typ thumbnail-light.svg
-
 thumbnail:
   typst compile --pages=1 --ppi=300 --format=png template/cv.typ docs/thumbnail.png
 
