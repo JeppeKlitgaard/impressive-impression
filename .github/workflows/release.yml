@@ -2,6 +2,7 @@ name: Package and push to registry repo
 on:
   push:
     tags: [ v* ]
+  manual:
 
 env:
   # the repository to which to push the release version
@@ -44,6 +45,7 @@ jobs:
 
       - name: Build package
         run: |
+          just install-preview
           just thumbnail
           just package out
 
