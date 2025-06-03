@@ -44,3 +44,10 @@ uninstall-preview: (remove "@preview")
 
 # run ci suite
 ci: test doc
+
+[linux]
+install-fonts:
+  mkdir -p ~/.local/share/fonts
+  cp fonts/FontAwesome6/FontAwesome6-Regular.ttf ~/.local/share/fonts/
+  cp fonts/OpenSans/*.ttf ~/.local/share/fonts/
+  fc-cache -fv
