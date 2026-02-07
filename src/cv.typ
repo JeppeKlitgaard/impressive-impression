@@ -52,18 +52,19 @@
 
           let left-over-space = th("aside-width") - th("margin") - size.width
           let gap = th("aside-heading-line-gap")
+          let opposite-gap = th("aside-heading-line-opposite-gap")
 
           let stroke-line = (
             paint: th("aside-heading-text").fill,
             thickness: th("aside-heading-line-thickness"),
-            cap: "butt",
+            cap: th("aside-heading-line-cap"),
           )
           let stroke-line-end = (
             paint: th("aside-heading-text").fill,
             thickness: th("aside-heading-line-thickness"),
-            cap: "round",
+            cap: th("aside-heading-line-cap"),
           )
-          let _line = line(start: (gap, 0%), length: left-over-space - gap, stroke: stroke-line)
+          let _line = line(start: (gap, 0%), length: left-over-space - gap - opposite-gap, stroke: stroke-line)
           let _boxed-line = box(_line, height: size.height)
           let _line2 = line(start: (gap, 0%), length: 0pt, stroke: stroke-line-end)
           let _boxed-line2 = box(_line2, height: size.height)
