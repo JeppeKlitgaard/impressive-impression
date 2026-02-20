@@ -76,20 +76,20 @@ jobs:
           files: |
             release-assets/*
 
-      - name: Release package on Typst package registry
-        run: |
-          mkdir -p "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME"
-          mv "package/${PKG_NAME}/${PKG_VERSION}" "typst-packages/${{ env.PATH_PREFIX }}/${PKG_NAME}"
-          rmdir "package/${PKG_NAME}"
-          rmdir package
+      # - name: Release package on Typst package registry
+      #   run: |
+      #     mkdir -p "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME"
+      #     mv "package/${PKG_NAME}/${PKG_VERSION}" "typst-packages/${{ env.PATH_PREFIX }}/${PKG_NAME}"
+      #     rmdir "package/${PKG_NAME}"
+      #     rmdir package
 
-          GIT_USER_NAME="$(git log -1 --pretty=format:'%an')"
-          GIT_USER_EMAIL="$(git log -1 --pretty=format:'%ae')"
+      #     GIT_USER_NAME="$(git log -1 --pretty=format:'%an')"
+      #     GIT_USER_EMAIL="$(git log -1 --pretty=format:'%ae')"
 
-          cd typst-packages
-          git config user.name "${GIT_USER_NAME}"
-          git config user.email "${GIT_USER_EMAIL}"
-          git checkout -b "${PKG_NAME}-${PKG_VERSION}"
-          git add .
-          git commit -m "${PKG_NAME}:${PKG_VERSION}"
-          git push --force --set-upstream origin "${PKG_NAME}-${PKG_VERSION}"
+      #     cd typst-packages
+      #     git config user.name "${GIT_USER_NAME}"
+      #     git config user.email "${GIT_USER_EMAIL}"
+      #     git checkout -b "${PKG_NAME}-${PKG_VERSION}"
+      #     git add .
+      #     git commit -m "${PKG_NAME}:${PKG_VERSION}"
+      #     git push --force --set-upstream origin "${PKG_NAME}-${PKG_VERSION}"
