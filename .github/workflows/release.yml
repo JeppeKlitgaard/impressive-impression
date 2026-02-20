@@ -52,7 +52,7 @@ jobs:
           just install-preview
           just install-fonts
           just thumbnail
-          just package out
+          just package package
 
       - name: Checkout package registry
         uses: actions/checkout@v4
@@ -61,12 +61,27 @@ jobs:
           token: ${{ secrets.REGISTRY_TOKEN }}
           path: typst-packages
 
-      - name: Release package
+      - name: Prepare release assets
+        run: |
+          mkdir -p release-assets
+          zip -r "release-assets/${PKG_NAME}-${PKG_VERSION}.zip" "package"
+          zip -r "release-assets/fonts.zip" "fonts"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ env.PKG_NAME }} ${{ env.PKG_VERSION }}
+          generate_release_notes: true
+          files: |
+            release-assets/*
+
+      - name: Release package on Typst package registry
         run: |
           mkdir -p "typst-packages/${{ env.PATH_PREFIX }}/$PKG_NAME"
-          mv "out/${PKG_NAME}/${PKG_VERSION}" "typst-packages/${{ env.PATH_PREFIX }}/${PKG_NAME}"
-          rmdir "out/${PKG_NAME}"
-          rmdir out
+          mv "package/${PKG_NAME}/${PKG_VERSION}" "typst-packages/${{ env.PATH_PREFIX }}/${PKG_NAME}"
+          rmdir "package/${PKG_NAME}"
+          rmdir package
 
           GIT_USER_NAME="$(git log -1 --pretty=format:'%an')"
           GIT_USER_EMAIL="$(git log -1 --pretty=format:'%ae')"
