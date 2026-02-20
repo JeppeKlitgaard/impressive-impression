@@ -29,7 +29,8 @@ jobs:
     outputs:
       pkg-name: ${{ env.PKG_NAME }}
       pkg-version: ${{ env.PKG_VERSION }}
-      pkg-id: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}
+      pkg-id: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-package
+      fonts-id: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-fonts
       git-user-name: ${{ env.GIT_USER_NAME }}
       git-user-email: ${{ env.GIT_USER_EMAIL }}
 
@@ -80,11 +81,18 @@ jobs:
           zip -r "dist/${PKG_NAME}-${PKG_VERSION}.zip" "package"
           zip -r "dist/fonts.zip" "fonts"
 
-      - name: Upload artifacts
+      - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}
-          path: dist/*
+          name: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-package
+          path: dist/${PKG_NAME}-${PKG_VERSION}.zip
+          retention-days: 3
+
+      - name: Upload fonts artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-fonts
+          path: dist/fonts.zip
           retention-days: 3
 
   release:
@@ -99,10 +107,15 @@ jobs:
         with:
           name: ${{ needs.build.outputs.pkg-id }}
 
+      - name: Download fonts artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.build.outputs.fonts-id }}
+
       - name: Add artifacts to release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ${{ needs.build.outputs.pkg-id }}/*
+          artifacts: ${{ needs.build.outputs.pkg-id }}/*,${{ needs.build.outputs.fonts-id }}/*
 
   publish:
     name: Publish to registry fork
