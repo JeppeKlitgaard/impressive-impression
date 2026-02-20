@@ -115,7 +115,7 @@ jobs:
       - name: Add artifacts to release
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}.zip,fonts.zip
+          artifacts: "${{ needs.build.outputs.pkg-name }}-${{ needs.build.outputs.pkg-version }}.zip",fonts.zip
 
   publish:
     name: Publish to registry fork
