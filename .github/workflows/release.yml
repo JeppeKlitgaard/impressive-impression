@@ -79,7 +79,7 @@ jobs:
       - name: Prepare release assets
         run: |
           mkdir -p dist
-          zip -r "dist/${PKG_NAME}-${PKG_VERSION}.zip" "package/*"
+          cd package && zip -r "../dist/${PKG_NAME}-${PKG_VERSION}.zip" . && cd ..
           zip -r "dist/fonts.zip" "fonts"
 
       - name: Upload package artifact
