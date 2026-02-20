@@ -99,13 +99,10 @@ jobs:
         with:
           name: ${{ needs.build.outputs.pkg-id }}
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Add artifacts to release
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          name: ${{ env.PKG_NAME }} ${{ env.PKG_VERSION }}
-          generate_release_notes: true
-          files: ${{ needs.build.outputs.pkg-id }}/*
+          artifacts: ${{ needs.build.outputs.pkg-id }}/*
 
   publish:
     name: Publish to registry fork
