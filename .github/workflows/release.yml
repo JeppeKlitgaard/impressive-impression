@@ -76,7 +76,7 @@ jobs:
 
       - name: Prepare release assets
         run: |
-          mkdir -p release-assets
+          mkdir -p dist
           zip -r "dist/${PKG_NAME}-${PKG_VERSION}.zip" "package"
           zip -r "dist/fonts.zip" "fonts"
 
