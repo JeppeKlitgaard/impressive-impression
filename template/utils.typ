@@ -1,5 +1,5 @@
 #import "@preview/fontawesome:0.5.0": fa-icon, fa-stack
-#import "@preview/impressive-impression:0.1.0": theme-helper
+#import "@preview/impressive-impression:0.1.24": theme-helper
 
 /// Return a flag from the assets directory.
 #let flag(id, ..image-args) = {

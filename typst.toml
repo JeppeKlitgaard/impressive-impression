@@ -4,7 +4,7 @@
 name = "impressive-impression"
 description = "A Typst template for a professional and readable curriculum vitae."
 
-version = "0.1.23"
+version = "0.1.24"
 compiler = "0.13.1"
 
 authors = ["Jeppe Klitgaard <hi@jeppe.science>"]

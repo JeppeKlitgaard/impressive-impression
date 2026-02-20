@@ -44,6 +44,10 @@ uninstall-preview: (remove "@preview")
 # run ci suite
 ci: test
 
+# bump version (major, minor, or patch)
+bump part:
+  ./scripts/version-bump "{{part}}"
+
 # Run dev suite
 dev: thumbnail demo test
 

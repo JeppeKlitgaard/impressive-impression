@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+USAGE="Usage: $(basename "$0") <major|minor|patch>"
+
+if [[ $# -ne 1 ]]; then
+  echo "$USAGE" >&2
+  exit 1
+fi
+
+PART="$1"
+if [[ "$PART" != "major" && "$PART" != "minor" && "$PART" != "patch" ]]; then
+  echo "Error: argument must be 'major', 'minor', or 'patch'" >&2
+  echo "$USAGE" >&2
+  exit 1
+fi
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.."
+TOML="$ROOT/typst.toml"
+
+# Read current version from typst.toml
+CURRENT=$(perl -lne 'print "$1" if /^version\s*=\s*"(.*)"/' < "$TOML")
+if [[ -z "$CURRENT" ]]; then
+  echo "Error: could not read version from $TOML" >&2
+  exit 1
+fi
+
+IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+
+case "$PART" in
+  major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+  minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+  patch) PATCH=$((PATCH + 1)) ;;
+esac
+
+NEW="${MAJOR}.${MINOR}.${PATCH}"
+
+echo "Bumping version: $CURRENT -> $NEW"
+
+# 1. Update typst.toml
+sed -i "s/^version = \"$CURRENT\"/version = \"$NEW\"/" "$TOML"
+echo "  Updated typst.toml"
+
+# 2. Update template .typ files (replace any version of impressive-impression)
+PKG_NAME=$(perl -lne 'print "$1" if /^name\s*=\s*"(.*)"/' < "$TOML")
+for f in "$ROOT"/template/*.typ; do
+  if grep -q "${PKG_NAME}:[0-9]" "$f"; then
+    sed -i "s/${PKG_NAME}:[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*/${PKG_NAME}:$NEW/g" "$f"
+    echo "  Updated $(basename "$f")"
+  fi
+done
+
+echo "Done."
