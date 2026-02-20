@@ -38,7 +38,12 @@ You can see what the template could look like in [demo.pdf](./demo.pdf).
 
 ### Installation in Typst WebApp
 
+Installation on the WebApp requires you to:
+1. Download and the `fonts.zip` archive from [here](https://github.com/JeppeKlitgaard/impressive-impression/releases/latest)
+1. Unzip the archive locally
+1. Upload the fonts to the project on the [Typst] webapp
 
+You should then see the document render correctly.
 
 ## Contributing
 
