@@ -80,7 +80,7 @@ jobs:
         run: |
           mkdir -p dist
           cd package && zip -r "../dist/${PKG_NAME}-${PKG_VERSION}.zip" . && cd ..
-          zip -r "dist/fonts.zip" "fonts"
+          cd fonts && zip -r "../dist/fonts.zip" . && cd ..
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4

@@ -33,8 +33,12 @@ You can see what the template could look like in [demo.pdf](./demo.pdf).
 - By default, FontAwesome 6 Fonts are used
   - The fonts can be installed using the files in the `fonts/FontAwesome6` folder
   - Note that using FontAwesome icons is not a requirement and is not actually implemented in the `impressive-impression` package, but added directly in the default template.
-- If you plan on cloning the _Impressive Impression_ repository, you should have [git-lfs] installed
+- If you plan on cloning the _Impressive Impression_ repository, you should have [git lfs] installed
   - This is installed by default in the Windows git installer
+
+### Installation in Typst WebApp
+
+
 
 ## Contributing
 
