@@ -29,6 +29,7 @@ jobs:
     outputs:
       pkg-name: ${{ env.PKG_NAME }}
       pkg-version: ${{ env.PKG_VERSION }}
+      pkg-release-name: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}
       pkg-id: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-package
       fonts-id: ${{ env.PKG_NAME }}-${{ env.PKG_VERSION }}-fonts
       git-user-name: ${{ env.GIT_USER_NAME }}
@@ -141,24 +142,25 @@ jobs:
           PKG_NAME: ${{ needs.build.outputs.pkg-name }}
           PKG_VERSION: ${{ needs.build.outputs.pkg-version }}
           PKG_ID: ${{ needs.build.outputs.pkg-id }}
+          PKG_RELEASE_NAME: ${{ needs.build.outputs.pkg-release-name }}
           GIT_USER_NAME: ${{ needs.build.outputs.git-user-name }}
           GIT_USER_EMAIL: ${{ needs.build.outputs.git-user-email }}
         run: |
-          unzip "${PKG_ID}/${PKG_ID}.zip" -d "${PKG_ID}"
+          unzip "${PKG_RELEASE_NAME}.zip" -d "${PKG_RELEASE_NAME}"
           mkdir -p "package-registry/${PATH_PREFIX}/${PKG_NAME}"
-          mv "${PKG_ID}/${PKG_NAME}/${PKG_VERSION}" "package-registry/${PATH_PREFIX}/${PKG_NAME}"
-          rmdir "${PKG_ID}/${PKG_NAME}"
+          mv "${PKG_RELEASE_NAME}/${PKG_NAME}/${PKG_VERSION}" "package-registry/${PATH_PREFIX}/${PKG_NAME}"
+          rmdir "${PKG_RELEASE_NAME}/${PKG_NAME}"
 
           cd package-registry
           git config user.name "${GIT_USER_NAME}"
           git config user.email "${GIT_USER_EMAIL}"
-          git checkout -b "${PKG_ID}"
+          git checkout -b "${PKG_RELEASE_NAME}"
           git add .
           git commit -m "${PKG_NAME}:${PKG_VERSION}"
 
       - name: Push package release to the fork
         env:
-          PKG_ID: ${{ needs.build.outputs.pkg-id }}
+          PKG_RELEASE_NAME: ${{ needs.build.outputs.pkg-release-name }}
         run: |
           cd package-registry
           git remote add fork "${REGISTRY_FORGE}/${REGISTRY_FORK}"
@@ -167,4 +169,4 @@ jobs:
           echo '  "refusing to allow a Personal Access Token to create or update workflow'
           echo '  `.github/workflows/deploy.yml` without `workflow` scope"'
           echo "then you need to bring your fork's main branch up to date with the registry repo"
-          git push --force --set-upstream fork "${PKG_ID}"
+          git push --force --set-upstream fork "${PKG_RELEASE_NAME}"
