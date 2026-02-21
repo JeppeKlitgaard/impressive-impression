@@ -66,8 +66,12 @@
           )
           let _line = line(start: (gap, 0%), length: left-over-space - gap - opposite-gap, stroke: stroke-line)
           let _boxed-line = box(_line, height: size.height)
+          let _line2 = line(start: (gap, 0%), length: 0pt, stroke: stroke-line-end)
+          let _boxed-line2 = box(_line2, height: size.height)
 
-          align(_boxed-line, horizon)
+          // let _line = align(box(line(length: left-over-space), height: size.height), horizon)
+          align(_boxed-line + _boxed-line2, horizon)
+          // [#_line]
         }, width: 0pt)
       } else {
         it
