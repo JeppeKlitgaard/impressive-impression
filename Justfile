@@ -53,6 +53,10 @@ ci: test
 bump part:
   ./scripts/version-bump "{{part}}"
 
+# create a git tag (vX.Y.Z) from version in typst.toml
+tag-release:
+  ./scripts/tag-release
+
 # Run dev suite
 dev: thumbnail demo test
 

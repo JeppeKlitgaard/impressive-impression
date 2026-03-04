@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")"; pwd -P)/.."
+TOML="$ROOT/typst.toml"
+
+# Read current version from typst.toml
+VERSION=$(perl -lne 'print "$1" if /^version\s*=\s*"(.*)"/' < "$TOML")
+if [[ -z "$VERSION" ]]; then
+  echo "Error: could not read version from $TOML" >&2
+  exit 1
+fi
+
+TAG="v$VERSION"
+
+# Check if tag already exists
+if git rev-parse "$TAG" >/dev/null 2>&1; then
+  echo "Error: tag $TAG already exists" >&2
+  exit 1
+fi
+
+git tag "$TAG"
+echo "Created tag $TAG"
