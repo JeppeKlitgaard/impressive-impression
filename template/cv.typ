@@ -1,7 +1,7 @@
 //! NOTE: You may need to install FontAwesome 6 and Open Sans fonts to render this CV correctly.
 //! See installation information at: https://github.com/JeppeKlitgaard/impressive-impression#installation
 
-#import "@preview/impressive-impression:0.1.25": (
+#import "@preview/impressive-impression:0.2.0": (
   cv,
   // Utils
   crop-image,

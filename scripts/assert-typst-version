@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TARGET_VERSION="0.14.2"
+
+version=$(typst --version | awk '{print $2}')
+if [[ "$version" != "$TARGET_VERSION" ]]; then
+  echo "Error: typst version must be exactly $TARGET_VERSION, but found $version" >&2
+  exit 1
+fi
+echo "typst version $version OK"
