@@ -83,7 +83,10 @@
   ),
   aside-heading-line-enable: true,
   aside-heading-line-gap: 10pt,
+  aside-heading-line-opposite-gap: 0pt,
   aside-heading-line-thickness: 1pt,
+  aside-heading-line-cap: "butt",
+  aside-heading-line-opposite-cap: "butt",
 
   aside-pill-box-inner: (
     fill: _aside-background-color.lighten(75%),
