@@ -25,7 +25,7 @@
 
 #let name = "Dirk Gently"
 #let pronouns = "he/him"
-#let profile-image = image("assets/profile.png")
+#let profile-image = image("assets/profile.jpg")
 #let short-description = [
   Holistic Detective & Interconnectedness Specialist
 ]
