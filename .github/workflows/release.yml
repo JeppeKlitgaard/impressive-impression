@@ -53,7 +53,7 @@ jobs:
       - name: Setup typst
         uses: typst-community/setup-typst@v4
         with:
-          typst-version: latest
+          typst-version: 0.14.2
 
       - name: Determine and check package metadata
         run: |

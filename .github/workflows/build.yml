@@ -25,7 +25,7 @@ jobs:
       - name: Install Typst
         uses: typst-community/setup-typst@v3
         with:
-          typst-version: "0.13"
+          typst-version: "0.14.2"
 
       - name: Compile
         run: |
