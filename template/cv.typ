@@ -8,6 +8,7 @@
   colorize-svg-string,
   // Elements
   dot-ratings,
+  skill-bar,
   make-pill,
   make-aside-persona,
   make-aside-grid,
@@ -37,6 +38,12 @@
 #let dot-ratings = dot-ratings.with(
   size: 6.5pt,
   spacing: 3.5pt,
+  color-active: th("primary-accent-color"),
+  color-inactive: th("faint-text-color").transparentize(65%),
+)
+#let skill-bar = skill-bar.with(
+  height: 8pt,
+  radius: 4pt,
   color-active: th("primary-accent-color"),
   color-inactive: th("faint-text-color").transparentize(65%),
 )
@@ -383,13 +390,17 @@
 
   == Problem Solving Skills
   #make-aside-grid(
-    columns: 3,
+    columns: 2,
     align: (horizon + center, horizon + left, horizon + right),
     theme: theme,
-    iconer("microchip"), [Tech Taming], dot-ratings(3, 5),
-    iconer("hammer"), [Percussive], dot-ratings(4, 5),
-    iconer("ruler"), [Non-Euclidean], dot-ratings(2, 5),
-    iconer("power-off"), [Rebooting], dot-ratings(5, 5),
+    iconer("microchip"), [Tech Taming],
+    grid.cell(colspan: 2, skill-bar(60%)),
+    iconer("hammer"), [Percussive],
+    grid.cell(colspan: 2, skill-bar(80%)),
+    iconer("ruler"), [Non-Euclidean],
+    grid.cell(colspan: 2, skill-bar(20%)),
+    iconer("power-off"), [Rebooting],
+    grid.cell(colspan: 2, skill-bar(100%)),
   )
 
   == Case Portfolio
